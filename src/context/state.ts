@@ -8,10 +8,10 @@ export const initialState: Alerts = {
       longitude: -43.21023170568746,
     },
   },
-  cities: null,
+  cities: undefined,
 };
 
 export default interface Alerts {
   userCoordinates: userPosition;
-  cities: Array<City> | null;
+  cities: Array<City> | undefined;
 }

@@ -6,7 +6,7 @@ export const StateContext = React.createContext({
   state: initialState,
   actions: {
     setUserCoordinates: (_data: { longitude: number; latitude: number }) => {},
-    setCities: (_cities: { cities: Array<City> }) => {},
+    setCities: (_cities: Array<City>) => {},
   },
 });
 

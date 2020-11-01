@@ -15,7 +15,7 @@ const Map = () => {
     actions.setUserCoordinates({ latitude: coords.lat, longitude: coords.lng });
   };
 
-  const setCenter = (userPosition: userPosition) => {
+  const setInitialCenter = (userPosition: userPosition) => {
     if (!userPosition?.coords?.longitude) return;
 
     const { latitude, longitude } = userPosition.coords;
@@ -24,7 +24,7 @@ const Map = () => {
     changePinLocation({ lat: latitude, lng: longitude });
   };
 
-  const getUserLocation = () => window && initGeolocation(setCenter);
+  const getUserLocation = () => window && initGeolocation(setInitialCenter);
 
   return (
     <div className={styles.container}>
