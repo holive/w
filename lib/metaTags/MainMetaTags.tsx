@@ -1,5 +1,5 @@
 import React from 'react';
-import { APP_TITLE } from '../../weather/variables';
+import { APP_TITLE } from '../../app/variables';
 
 const MainMetaTags = () => {
   return (

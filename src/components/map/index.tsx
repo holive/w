@@ -4,6 +4,7 @@ import { initGeolocation, userPosition } from '@/user';
 import { Pin } from '@/components/pin';
 import { StateContext } from '@/context';
 import { initialState } from '@/context/state';
+import styles from './index.module.css';
 
 const Map = () => {
   const { state, actions } = useContext(StateContext);
@@ -26,10 +27,10 @@ const Map = () => {
   const getUserLocation = () => window && initGeolocation(setCenter);
 
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div className={styles.container}>
       <GoogleMap
         center={center}
-        bootstrapURLKeys={{ key: '' }}
+        bootstrapURLKeys={{ key: process.env.MAPS_SECRET }}
         defaultCenter={{
           lat: initialState.userCoordinates.coords.latitude,
           lng: initialState.userCoordinates.coords.longitude,

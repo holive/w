@@ -2,8 +2,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next",
-    "build": "next build",
+    "dev": "MAPS_SECRET=${MAPS_SECRET} OPEN_WEATHER_SECRET=${OPEN_WEATHER_SECRET} next",
+    "build": "MAPS_SECRET=${MAPS_SECRET} OPEN_WEATHER_SECRET=${OPEN_WEATHER_SECRET} next build",
     "start": "next start",
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",

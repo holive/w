@@ -1,5 +1,5 @@
 .container {
-  width: 280px;
+  width: 300px;
   height: 100vh;
   position: relative;
   -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.2);
@@ -12,8 +12,8 @@
 
 .searchButtonContainer {
   background-color: #e8e8e8;
-  padding: 45px 15px 45px;
   display: flex;
+  height: 240px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -66,4 +66,52 @@
 
 .searchButton.buttonDisabled img {
   opacity: 0.6;
+}
+
+.searchResultContainer {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 240px);
+  padding: 15px;
+}
+
+.searchResultContainer::-webkit-scrollbar {
+  width: 11px;
+}
+.searchResultContainer {
+  scrollbar-width: thin;
+  scrollbar-color: #90A4AE #CFD8DC;
+}
+.searchResultContainer::-webkit-scrollbar-track {
+  background: #CFD8DC;
+}
+.searchResultContainer::-webkit-scrollbar-thumb {
+  background-color: #90A4AE ;
+  border-radius: 6px;
+  border: 3px solid #CFD8DC;
+}
+
+.list {
+
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  font-size: 14px;
+  letter-spacing: 0.03rem;
+  cursor: pointer;
+}
+
+.listText {
+  display: inline-block;
+}
+
+.listIcon {
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  display: inline-block;
 }
