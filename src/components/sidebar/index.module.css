@@ -1,0 +1,69 @@
+.container {
+  width: 280px;
+  height: 100vh;
+  position: relative;
+  -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
+
+.container:focus {
+  outline: none!important;
+}
+
+.searchButtonContainer {
+  background-color: #e8e8e8;
+  padding: 45px 15px 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.searchButton {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 100ms ease-in-out;
+
+  background: linear-gradient(145deg, #ffffff, #d9d9d9);
+  box-shadow: 23px 23px 45px #cdcdcd,
+  -23px -23px 45px #ffffff;
+}
+
+.searchButton.buttonDisabled {
+  box-shadow: 23px 23px 45px #e1e1e1,
+  -23px -23px 45px #f5f5f5;
+  cursor: default;
+}
+
+.searchButton:focus {
+  outline: none!important;
+}
+
+.text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  margin: 10px 0 0;
+  color: #666;
+  letter-spacing: 0.03rem;
+  transition: all 250ms ease;
+}
+
+.searchButton.buttonDisabled .text {
+  opacity: 0.7;
+}
+
+.buttonDisabled img {
+  opacity: 1;
+  transition: all 250ms ease-in-out;
+}
+
+.searchButton.buttonDisabled img {
+  opacity: 0.6;
+}
