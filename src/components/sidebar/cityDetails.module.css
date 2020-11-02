@@ -1,0 +1,102 @@
+.cityDetails {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e8e8e8;
+  z-index: 1;
+  padding: 60px 15px 15px;
+  transition: all 150ms ease-out;
+  transform: translate(0, 0);
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  width: 200px;
+  min-height: 200px;
+  border-radius: 15px;
+  background: #e8e8e8;
+  box-shadow: 23px 23px 45px #c5c5c5, -23px -23px 45px #ffffff;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back {
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  letter-spacing: 0.03rem;
+  margin-top: 20px;
+  background-color: transparent;
+  transition: all 100ms ease-in-out;
+}
+
+.back:hover {
+  color: #888;
+}
+
+.back:focus {
+  outline: none!important;
+}
+
+.listIcon {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  display: inline-block;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -5px;
+  left: -4px;
+  pointer-events: none;
+}
+
+.titleContainer p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #000;
+}
+
+.cityName {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+  text-transform: capitalize;
+  pointer-events: none;
+}
+
+.temp {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #ec4e00;
+  pointer-events: none;
+  position: relative;
+  top: 3px;
+  letter-spacing: 0.05rem;
+}
+
+.temp span {
+  font-size: 14px;
+  margin-right: 3px;
+}

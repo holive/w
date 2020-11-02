@@ -13,7 +13,7 @@
 .searchButtonContainer {
   background-color: #e8e8e8;
   display: flex;
-  height: 240px;
+  height: 280px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -21,6 +21,11 @@
 
 .hideScrollbar {
   overflow-y: hidden!important;
+  overflow-x: hidden!important;
+}
+
+.hideScrollbar .list {
+  display: none;
 }
 
 .searchButton {
@@ -75,8 +80,9 @@
 .searchResultContainer {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 280px);
   padding: 15px;
+  position: relative;
 }
 
 .searchResultContainer::-webkit-scrollbar {

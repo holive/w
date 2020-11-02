@@ -7,6 +7,9 @@ export const StateContext = React.createContext({
   actions: {
     setUserCoordinates: (_data: { longitude: number; latitude: number }) => {},
     setCities: (_cities: Array<City>) => {},
+    setSelectedCity: (_id: number) => {},
+    setMapCenter: (_coords: Array<number>) => {},
+    setAllState: (_state: State) => {},
   },
 });
 
@@ -21,6 +24,9 @@ export const AppContext = (props: { children: React.ReactNode }) => {
   const actions = {
     setUserCoordinates: setUserCoordinates.bind(null, state, setState),
     setCities: setCities.bind(null, state, setState),
+    setSelectedCity: setSelectedCity.bind(null, state, setState),
+    setMapCenter: setMapCenter.bind(null, state, setState),
+    setAllState: setAllState.bind(null, state, setState),
   };
 
   return (
@@ -40,4 +46,20 @@ const setUserCoordinates = (
 
 const setCities = (_state: State, setState: Function, cities: Array<City>) => {
   setState({ cities });
+};
+
+const setSelectedCity = (_state: State, setState: Function, id: number) => {
+  setState({ selectedCity: { id } });
+};
+
+const setMapCenter = (
+  _state: State,
+  setState: Function,
+  coords: Array<number>,
+) => {
+  setState({ mapCenter: coords });
+};
+
+const setAllState = (_state: State, setState: Function, newState: State) => {
+  setState(newState);
 };

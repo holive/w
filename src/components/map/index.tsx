@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import GoogleMap from 'google-map-react';
 import { initGeolocation, userPosition } from '@/user';
 import { Pin } from '@/components/pin';

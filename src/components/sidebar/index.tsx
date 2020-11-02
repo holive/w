@@ -1,12 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './index.module.css';
+import stylesCityDetails from './cityDetails.module.css';
 import { StateContext } from '@/context';
 import { getWeatherData } from '@/openweather/service';
 import { weatherIconUrl } from '../../../app/variables';
+import { City } from '@/openweather';
 
 const Sidebar = () => {
   const [searchButtonEnabled, setSearchButtonEnabled] = useState(true);
+  const [detailActive, setDetailActive] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { state, actions } = useContext(StateContext);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!state.userCoordinates.coords.latitude) return;
@@ -19,6 +27,7 @@ const Sidebar = () => {
 
     if (!searchButtonEnabled) return;
     setSearchButtonEnabled(false);
+    setDetailActive(false);
 
     const { latitude, longitude } = state.userCoordinates.coords;
     getWeatherData(latitude, longitude, actions.setCities);
@@ -40,18 +49,36 @@ const Sidebar = () => {
     );
   };
 
-  const getCityList = () => {
-    const newCities = state.cities.map((v, i) => {
-      let icon = '/03d.png';
-      let description = '';
+  const getIconAndDescription = (
+    v: City,
+  ): { icon: string; description: string } => {
+    let icon = '/03d.png';
+    let description = '';
 
-      if (v.weather.length) {
-        icon = v.weather[0].icon;
-        description = v.weather[0].description;
-      }
+    if (v.weather.length) {
+      icon = v.weather[0].icon;
+      description = v.weather[0].description;
+    }
+
+    return { icon, description };
+  };
+
+  const getCityList = () => {
+    const handleClick = (city: City) => {
+      setDetailActive(true);
+
+      const newState = { ...state };
+      newState.selectedCity.id = city.id;
+      newState.mapCenter = [city.coord.lat, city.coord.lon];
+
+      actions.setAllState(newState);
+    };
+
+    const newCities = state.cities?.map((v, i) => {
+      const { icon, description } = getIconAndDescription(v);
 
       return (
-        <li key={i}>
+        <li key={i} onClick={() => handleClick(v)}>
           <img
             src={weatherIconUrl(icon)}
             alt={description}
@@ -65,7 +92,61 @@ const Sidebar = () => {
     return <ul className={styles.list}>{newCities}</ul>;
   };
 
+  const cityDetails = () => {
+    const back = (e: any) => {
+      e.preventDefault();
+
+      setDetailActive(false);
+      actions.setSelectedCity(0);
+    };
+
+    const width = detailActive
+      ? 0
+      : document.querySelector('.' + styles.container)?.getBoundingClientRect()
+          .width;
+
+    const currentCity = state.cities?.find(
+      (el) => el.id === state.selectedCity.id,
+    );
+    if (!currentCity) return null;
+
+    const { icon, description } = getIconAndDescription(currentCity);
+
+    return (
+      <div
+        className={stylesCityDetails.cityDetails}
+        style={{ transform: `translate(-${width}px, 0)` }}
+      >
+        <div className={stylesCityDetails.container}>
+          <h3 className={stylesCityDetails.cityName}>{currentCity.name}</h3>
+
+          <div className={stylesCityDetails.titleContainer}>
+            <img
+              src={weatherIconUrl(icon)}
+              alt={description}
+              className={stylesCityDetails.listIcon}
+            />
+            <p>{description}</p>
+          </div>
+
+          <div className={stylesCityDetails.temp}>
+            <span>min</span> {currentCity.main.temp_min}°
+          </div>
+          <div className={stylesCityDetails.temp}>
+            <span>max</span> {currentCity.main.temp_max}°
+          </div>
+
+          <button className={stylesCityDetails.back} onClick={(e) => back(e)}>
+            &#xab; back
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const emptyCities = (): boolean => !state.cities || !state.cities.length;
+
+  const shouldHideScrollbar = (): boolean => emptyCities() || detailActive;
 
   return (
     <div className={styles.container}>
@@ -74,10 +155,12 @@ const Sidebar = () => {
       <div
         className={[
           styles.searchResultContainer,
-          emptyCities() ? styles.hideScrollbar : '',
+          shouldHideScrollbar() ? styles.hideScrollbar : '',
         ].join(' ')}
       >
         {emptyCities() ? null : getCityList()}
+
+        {isClient && cityDetails()}
       </div>
     </div>
   );

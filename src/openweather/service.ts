@@ -42,6 +42,7 @@ export const deduplicate = (res: Openweather): Array<City> => {
       name: v.name,
       main: v.main,
       weather: v.weather,
+      coord: v.coord,
     };
 
     cities.push(newCity);

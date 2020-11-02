@@ -9,9 +9,19 @@ export const initialState: Alerts = {
     },
   },
   cities: undefined,
+  selectedCity: {
+    id: undefined,
+  },
+  mapCenter: undefined,
 };
 
 export default interface Alerts {
   userCoordinates: userPosition;
   cities: Array<City> | undefined;
+  selectedCity: selectedCity | undefined;
+  mapCenter: Array<number> | undefined;
+}
+
+interface selectedCity {
+  id: number;
 }
