@@ -8,3 +8,11 @@ export const Pin = ({ lat, lng }) => {
     </div>
   );
 };
+
+export const SelectedCityPin = ({ lat, lng }) => {
+  return <div className={styles.selectedCityPin} />;
+};
+
+export const CityPin = ({ lat, lng, callback }) => {
+  return <div className={styles.cityPin} onClick={() => callback()} />;
+};

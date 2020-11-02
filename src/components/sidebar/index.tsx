@@ -17,6 +17,12 @@ const Sidebar = () => {
   }, []);
 
   useEffect(() => {
+    if (state.selectedCity.id !== 0 && detailActive) {
+      selectCity(getCurrentCity());
+    }
+  }, [state.selectedCity]);
+
+  useEffect(() => {
     if (!state.userCoordinates.coords.latitude) return;
 
     setSearchButtonEnabled(true);
@@ -63,22 +69,22 @@ const Sidebar = () => {
     return { icon, description };
   };
 
+  const selectCity = (city: City) => {
+    setDetailActive(true);
+
+    const newState = { ...state };
+    newState.selectedCity.id = city.id;
+    newState.mapCenter = [city.coord.lat, city.coord.lon];
+
+    actions.setAllState(newState);
+  };
+
   const getCityList = () => {
-    const handleClick = (city: City) => {
-      setDetailActive(true);
-
-      const newState = { ...state };
-      newState.selectedCity.id = city.id;
-      newState.mapCenter = [city.coord.lat, city.coord.lon];
-
-      actions.setAllState(newState);
-    };
-
     const newCities = state.cities?.map((v, i) => {
       const { icon, description } = getIconAndDescription(v);
 
       return (
-        <li key={i} onClick={() => handleClick(v)}>
+        <li key={i} onClick={() => selectCity(v)}>
           <img
             src={weatherIconUrl(icon)}
             alt={description}
@@ -90,6 +96,10 @@ const Sidebar = () => {
     });
 
     return <ul className={styles.list}>{newCities}</ul>;
+  };
+
+  const getCurrentCity = (): City => {
+    return state.cities?.find((el) => el.id === state.selectedCity.id);
   };
 
   const cityDetails = () => {
@@ -105,9 +115,7 @@ const Sidebar = () => {
       : document.querySelector('.' + styles.container)?.getBoundingClientRect()
           .width;
 
-    const currentCity = state.cities?.find(
-      (el) => el.id === state.selectedCity.id,
-    );
+    const currentCity = getCurrentCity();
     if (!currentCity) return null;
 
     const { icon, description } = getIconAndDescription(currentCity);
