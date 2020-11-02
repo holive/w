@@ -1,0 +1,73 @@
+.container {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .container {
+    display: none;
+  }
+}
+
+.input {
+  height: 40px;
+  width: 400px;
+  border: none;
+  padding: 10px 10px 10px 36px;
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.container svg {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  fill: #666;
+}
+
+.input::-webkit-input-placeholder { /* Edge */
+  color: #666;
+  opacity: 0.7;
+}
+
+.input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #666;
+  opacity: 0.7;
+}
+
+.input::placeholder {
+  color: #666;
+  opacity: 0.7;
+}
+
+.suggestionItem {
+  padding: 10px;
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  transition: all 250ms ease;
+}
+
+.suggestionItemActive {
+  padding: 10px;
+  color: #bbb;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  transition: all 250ms ease;
+}
+
+.autocompleteDropdownContainer {
+
+}

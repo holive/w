@@ -11,6 +11,7 @@ import {
 import { StateContext } from '@/context';
 import { initialState } from '@/context/state';
 import styles from './index.module.css';
+import SearchInput from '@/components/search';
 
 const Map = () => {
   const { state, actions } = useContext(StateContext);
@@ -62,6 +63,8 @@ const Map = () => {
   };
 
   const emptyCities = (): boolean => !state.cities || !state.cities.length;
+  const shouldRenderSelectedPin =
+    shouldDisplaySelectedCityPin() && !!state.cities?.length;
 
   return (
     <div
@@ -84,12 +87,14 @@ const Map = () => {
       >
         <Pin lat={latitude} lng={longitude} />
 
-        {shouldDisplaySelectedCityPin() && (
+        {shouldRenderSelectedPin && (
           <SelectedCityPin lat={state.mapCenter[0]} lng={state.mapCenter[1]} />
         )}
 
         {state.cities && state.cities?.length && getCitiesPins()}
       </GoogleMap>
+
+      <SearchInput />
     </div>
   );
 };

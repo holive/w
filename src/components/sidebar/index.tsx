@@ -17,6 +17,10 @@ const Sidebar = () => {
   }, []);
 
   useEffect(() => {
+    if (state.cities === undefined) setSearchButtonEnabled(true);
+  }, [state.cities]);
+
+  useEffect(() => {
     if (state.selectedCity.id !== 0 && state.selectedCity.id !== undefined) {
       selectCity(getCurrentCity());
     }
