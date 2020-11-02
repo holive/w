@@ -1,7 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import GoogleMap from 'google-map-react';
 import { initGeolocation, userPosition } from '@/user';
-import { Pin, SelectedCityPin, CityPin } from '@/components/pin';
+import {
+  Pin,
+  SelectedCityPin,
+  CityPin,
+  OnClickMapProps,
+  preventChangeUserPinLocation,
+} from '@/components/pin';
 import { StateContext } from '@/context';
 import { initialState } from '@/context/state';
 import styles from './index.module.css';
@@ -17,7 +23,9 @@ const Map = () => {
     }
   }, [state.mapCenter]);
 
-  const changePinLocation = (coords: { lat: number; lng: number }) => {
+  const changePinLocation = (coords: OnClickMapProps) => {
+    if (preventChangeUserPinLocation(coords)) return;
+
     actions.setUserCoordinates({ latitude: coords.lat, longitude: coords.lng });
   };
 
@@ -53,8 +61,15 @@ const Map = () => {
     });
   };
 
+  const emptyCities = (): boolean => !state.cities || !state.cities.length;
+
   return (
-    <div className={styles.container}>
+    <div
+      className={[
+        styles.container,
+        emptyCities() ? styles.emptyListMobile : '',
+      ].join(' ')}
+    >
       <GoogleMap
         center={center}
         bootstrapURLKeys={{ key: process.env.MAPS_SECRET }}

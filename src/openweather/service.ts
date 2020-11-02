@@ -1,5 +1,5 @@
 import { openWeatherUrl } from '../../app/variables';
-import { List, Openweather } from '@/openweather/api';
+import { List, Main, Openweather } from '@/openweather/api';
 import { City } from '@/openweather/index';
 
 export const getWeatherData = (
@@ -26,10 +26,13 @@ const processResp = (res: Openweather): Array<City> => {
     return null;
   }
 
-  return deduplicate(res);
+  return deduplicate(res, _formatWeather);
 };
 
-export const deduplicate = (res: Openweather): Array<City> => {
+export const deduplicate = (
+  res: Openweather,
+  formatWeather: (m: Main) => Main,
+): Array<City> => {
   const cities: Array<City> = [];
   const cityNames: { [key: string]: null } = {};
 
@@ -40,7 +43,7 @@ export const deduplicate = (res: Openweather): Array<City> => {
     const newCity: City = {
       id: v.id,
       name: v.name,
-      main: v.main,
+      main: formatWeather(v.main),
       weather: v.weather,
       coord: v.coord,
     };
@@ -49,4 +52,11 @@ export const deduplicate = (res: Openweather): Array<City> => {
   });
 
   return cities;
+};
+
+export const _formatWeather = (main: Main): Main => {
+  const newMain = { ...main };
+  newMain.temp_min = Math.round(main.temp_min);
+  newMain.temp_max = Math.round(main.temp_max);
+  return newMain;
 };

@@ -23,6 +23,7 @@
   background: #e8e8e8;
   box-shadow: 23px 23px 45px #c5c5c5, -23px -23px 45px #ffffff;
   padding: 15px;
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -41,6 +42,10 @@
   margin-top: 20px;
   background-color: transparent;
   transition: all 100ms ease-in-out;
+}
+
+.backM {
+  display: none;
 }
 
 .back:hover {
@@ -99,4 +104,62 @@
 .temp span {
   font-size: 14px;
   margin-right: 3px;
+}
+
+@media (max-width: 767px) {
+  .cityDetails {
+    padding: 20px 0px 0px;
+  }
+
+  .container {
+    width: 250px;
+    min-height: auto;
+    box-shadow: 10px 10px 10px #ddd, -10px -10px 10px #eee;
+    padding-top: 30px;
+  }
+
+  .cityName {
+    font-size: 14px;
+  }
+
+  .titleContainer {
+    top: 0;
+  }
+
+  .listIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .temp {
+    top: 0;
+    font-size: 14px;
+  }
+
+  .temp span {
+    font-size: 13px;
+  }
+
+  .back {
+    display: none;
+  }
+
+  .backM {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none!important;
+
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    line-height: 0.1rem;
+    color: #999;
+  }
 }

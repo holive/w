@@ -4,6 +4,7 @@
   position: relative;
   -webkit-box-shadow: 0 4px 10px rgba(0,0,0,.2);
   box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  border-right: 1px solid #f1f1f1;
 }
 
 .container:focus {
@@ -83,6 +84,7 @@
   height: calc(100vh - 280px);
   padding: 15px;
   position: relative;
+  background-color: #e8e8e8;
 }
 
 .searchResultContainer::-webkit-scrollbar {
@@ -124,4 +126,54 @@
   height: 50px;
   margin: 0;
   display: inline-block;
+}
+
+/* media queries */
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    height: calc(50vh + 1px);
+    border-right: none;
+    border-bottom: 1px solid #f1f1f1;
+    transition: all 150ms ease;
+  }
+
+  .container.emptyListMobile {
+    height: calc(18vh + 1px);
+  }
+
+  .searchButtonContainer {
+    height: 100px;
+  }
+
+  .searchResultContainer {
+    height: calc(50vh - 100px);
+    background-color: #e8e8e8;
+  }
+
+  .searchResultContainer::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  .searchButton {
+    width: 70px;
+    height: 70px;
+    box-shadow: 10px 10px 10px #ddd, -10px -10px 10px #eee !important;
+  }
+
+  .searchButton img {
+    width: 20px;
+    margin-top: -5px;
+  }
+
+  .text {
+    font-size: 14px;
+    margin: 2px 0 0;
+    letter-spacing: 0;
+  }
+
+  .listIcon {
+    width: 40px;
+    height: 40px;
+  }
 }

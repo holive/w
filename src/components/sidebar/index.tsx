@@ -17,7 +17,7 @@ const Sidebar = () => {
   }, []);
 
   useEffect(() => {
-    if (state.selectedCity.id !== 0 && detailActive) {
+    if (state.selectedCity.id !== 0 && state.selectedCity.id !== undefined) {
       selectCity(getCurrentCity());
     }
   }, [state.selectedCity]);
@@ -147,6 +147,10 @@ const Sidebar = () => {
           <button className={stylesCityDetails.back} onClick={(e) => back(e)}>
             &#xab; back
           </button>
+
+          <button className={stylesCityDetails.backM} onClick={(e) => back(e)}>
+            x
+          </button>
         </div>
       </div>
     );
@@ -157,7 +161,12 @@ const Sidebar = () => {
   const shouldHideScrollbar = (): boolean => emptyCities() || detailActive;
 
   return (
-    <div className={styles.container}>
+    <div
+      className={[
+        styles.container,
+        emptyCities() ? styles.emptyListMobile : '',
+      ].join(' ')}
+    >
       <div className={styles.searchButtonContainer}>{searchButton()}</div>
 
       <div
