@@ -12,32 +12,27 @@ export const getWeatherData = (
   fetch(url)
     .then((res) => res.json())
     .then((res) => {
-      let cities = processResp(res);
-      if (!cities) cities = [];
-
+      const cities = processResp(res) || [];
       saveWeatherData(cities);
     })
     .catch((e) => console.warn(e.message));
 };
 
-const processResp = (res: Openweather): Array<City> => {
+export const processResp = (res: Openweather): Array<City> => {
   if (!res?.cod || res.cod !== '200' || !res.list?.length) {
     console.log('processResp: list not found');
     return null;
   }
 
-  return deduplicate(res, _formatWeather);
+  return deduplicate(res);
 };
 
-export const deduplicate = (
-  res: Openweather,
-  formatWeather: (m: Main) => Main,
-): Array<City> => {
+export const deduplicate = (res: Openweather): Array<City> => {
   const cities: Array<City> = [];
   const cityNames: { [key: string]: null } = {};
 
   res.list.forEach((v: List, i) => {
-    if (cityNames[v.name] === null) return;
+    if (cityNames[v.name] === null || !v.name) return;
     cityNames[v.name] = null;
 
     const newCity: City = {
@@ -54,7 +49,7 @@ export const deduplicate = (
   return cities;
 };
 
-export const _formatWeather = (main: Main): Main => {
+const formatWeather = (main: Main): Main => {
   const newMain = { ...main };
   newMain.temp_min = Math.round(main.temp_min);
   newMain.temp_max = Math.round(main.temp_max);

@@ -1,0 +1,48 @@
+{
+  "message": "accurate",
+  "cod": "200",
+  "count": 1,
+  "list": [
+    {
+      "id": 3469745,
+      "name": "Boa Vista",
+      "coord": {
+        "lat": -22.03,
+        "lon": -41.1
+      },
+      "main": {
+        "temp": 294.69,
+        "feels_like": 293.27,
+        "temp_min": 294.69,
+        "temp_max": 294.69,
+        "pressure": 1015,
+        "humidity": 86,
+        "sea_level": 1015,
+        "grnd_level": 1015
+      },
+      "dt": 1604196491,
+      "wind": {
+        "speed": 6.71,
+        "deg": 193
+      },
+      "sys": {
+        "country": "BR"
+      },
+      "rain": {
+        "1h": 0.12
+      },
+      "snow": null,
+      "clouds": {
+        "all": 85
+      },
+      "weather": [
+        {
+          "id": 500,
+          "main": "Rain",
+          "description": "light rain",
+          "icon": "10n"
+        }
+      ]
+    }
+  ]
+}

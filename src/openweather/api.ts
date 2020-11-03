@@ -13,7 +13,7 @@ export interface List {
   dt: number;
   wind: Wind;
   sys: Sys;
-  rain: null;
+  rain: any;
   snow: null;
   clouds: Clouds;
   weather: Weather[];

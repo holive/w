@@ -84,7 +84,7 @@ const Map = () => {
           lat: initialState.userCoordinates.coords.latitude,
           lng: initialState.userCoordinates.coords.longitude,
         }}
-        defaultZoom={12}
+        defaultZoom={11}
         onGoogleApiLoaded={() => getUserLocation()}
         onClick={changePinLocation}
         yesIWantToUseGoogleMapApiInternals
