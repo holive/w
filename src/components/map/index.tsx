@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import GoogleMap from 'google-map-react';
 import { initGeolocation, userPosition } from '@/user';
 import {
   Pin,
@@ -12,6 +11,11 @@ import { StateContext } from '@/context';
 import { initialState } from '@/context/state';
 import styles from './index.module.css';
 import SearchInput from '@/components/search';
+import dynamic from 'next/dynamic';
+
+const GoogleMap: any = dynamic(() => import('google-map-react'), {
+  ssr: false,
+});
 
 const Map = () => {
   const { state, actions } = useContext(StateContext);

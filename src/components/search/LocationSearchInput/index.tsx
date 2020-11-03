@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+import React, { useContext, useEffect, useState } from 'react';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { Suggestion } from '@/components/search/LocationSearchInput/types';
 import { StateContext } from '@/context';
 import styles from '../index.module.css';
+import dynamic from 'next/dynamic';
+
+const PlacesAutocomplete: any = dynamic(
+  () => import('react-places-autocomplete'),
+  { ssr: false },
+);
 
 const LocationSearchInput = () => {
   const [address, setAddress] = useState('');

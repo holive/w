@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.css';
 
 import LocationSearchInput from '@/components/search/LocationSearchInput';
 import { max768 } from '../../../lib/max768';
 
 const SearchInput = () => {
-  if (max768()) return null;
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // @ts-ignore
+    // We need to wait google maps scripts to be loaded.
+    if (typeof window !== 'undefined' && window.google) setIsClient(true);
+  }, []);
+
+  if (max768() || !isClient) return null;
 
   return (
     <div className={styles.container}>
