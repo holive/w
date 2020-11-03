@@ -8,9 +8,9 @@ const SearchInput = () => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // @ts-ignore
-    // We need to wait google maps scripts to be loaded.
-    if (typeof window !== 'undefined' && window.google) setIsClient(true);
+    if (typeof window !== 'undefined') {
+      setIsClient(true);
+    }
   }, []);
 
   if (max768() || !isClient) return null;
